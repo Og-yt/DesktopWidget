@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
 
+
 namespace DesktopWidget.Services;
 
 public sealed class SystemMonitor : IDisposable

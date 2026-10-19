@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,6 +10,7 @@ using System.Windows.Threading;
 using DesktopWidget.Services;
 
 namespace DesktopWidget;
+
 
 public partial class MainWindow : Window
 {
@@ -188,6 +190,46 @@ public partial class MainWindow : Window
             && e.ChangedButton == MouseButton.Left)
         {
             DragMove();
+        }
+    }
+
+    private async void Commit_Click(object sender, RoutedEventArgs e)
+    {
+        GitTargetPathInput.IsEnabled = false;
+        GitCommitMessageInput.IsEnabled = false;
+        GitCommitButton.IsEnabled = false;
+        GitOutput.Text = "Running git status, add, commit, and push...";
+
+        try
+        {
+            GitOutput.Text = await GitCommitService.CommitAndPushAsync(
+                GitTargetPathInput.Text,
+                GitCommitMessageInput.Text);
+        }
+        catch (ArgumentException ex)
+        {
+            GitOutput.Text = $"Git operation failed: {ex.Message}";
+        }
+        catch (IOException ex)
+        {
+            GitOutput.Text = $"Git operation failed: {ex.Message}";
+        }
+        catch (InvalidOperationException ex)
+        {
+            GitOutput.Text = $"Git operation failed: {ex.Message}";
+        }
+        catch (Win32Exception ex)
+        {
+            GitOutput.Text = $"Git operation failed: {ex.Message}";
+        }
+        finally
+        {
+            if (!closing)
+            {
+                GitTargetPathInput.IsEnabled = true;
+                GitCommitMessageInput.IsEnabled = true;
+                GitCommitButton.IsEnabled = true;
+            }
         }
     }
 

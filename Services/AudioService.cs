@@ -1,5 +1,6 @@
 using NAudio.CoreAudioApi;
 
+
 namespace DesktopWidget.Services;
 
 public sealed class AudioService : IDisposable

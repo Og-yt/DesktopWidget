@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DesktopWidget.Services;
 
+
 public sealed class CommandService
 {
     public async Task<string> ExecuteAsync(string command)
