@@ -1,0 +1,174 @@
+<Window x:Class="DesktopWidget.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="OSC Desktop Widget"
+        Width="390"
+        Height="680"
+        MinWidth="340"
+        MinHeight="500"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Topmost="False"
+        ShowInTaskbar="True"
+        ResizeMode="CanResizeWithGrip"
+        Opacity="0.96">
+    <Border x:Name="Panel"
+            Background="#F0151825"
+            BorderBrush="#FF484D70"
+            BorderThickness="1"
+            CornerRadius="16"
+            Padding="16">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="22"
+                              ShadowDepth="4"
+                              Opacity="0.35"/>
+        </Border.Effect>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <DockPanel Margin="0,0,0,14">
+                    <Button Content="×"
+                            DockPanel.Dock="Right"
+                            Width="32"
+                            Height="28"
+                            Click="Close_Click"/>
+
+                    <StackPanel MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                        <TextBlock Text="OSC CONTROL CENTER"
+                                   Foreground="#FFB8BFFF"
+                                   FontSize="12"
+                                   FontWeight="Bold"/>
+                        <TextBlock Text="Desktop System Monitor"
+                                   Foreground="White"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <TextBlock Text="SYSTEM"
+                           Foreground="#FF9CA6E8"
+                           FontWeight="Bold"
+                           Margin="0,4,0,8"/>
+
+                <Border Background="#FF202438"
+                        CornerRadius="10"
+                        Padding="12">
+                    <StackPanel>
+                        <TextBlock x:Name="CpuText"
+                                   Foreground="White"
+                                   FontSize="14"
+                                   Text="CPU: --%"/>
+                        <ProgressBar x:Name="CpuBar"
+                                     Height="7"
+                                     Maximum="100"
+                                     Margin="0,6,0,12"/>
+                        <TextBlock x:Name="MemoryText"
+                                   Foreground="White"
+                                   FontSize="14"
+                                   Text="Available RAM: -- MB"/>
+                        <TextBlock Text="TOP PROCESSES"
+                                   Foreground="#FF9CA6E8"
+                                   Margin="0,14,0,6"
+                                   FontWeight="Bold"/>
+                        <TextBox x:Name="ProcessText"
+                                 Background="Transparent"
+                                 Foreground="#FFD9DDF5"
+                                 BorderThickness="0"
+                                 FontFamily="Consolas"
+                                 FontSize="11"
+                                 IsReadOnly="True"
+                                 TextWrapping="NoWrap"
+                                 Height="100"/>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Text="AUDIO"
+                           Foreground="#FF9CA6E8"
+                           FontWeight="Bold"
+                           Margin="0,16,0,8"/>
+
+                <Border Background="#FF202438"
+                        CornerRadius="10"
+                        Padding="12">
+                    <StackPanel>
+                        <DockPanel>
+                            <TextBlock Text="Master volume"
+                                       Foreground="White"/>
+                            <TextBlock x:Name="VolumeText"
+                                       DockPanel.Dock="Right"
+                                       Foreground="White"
+                                       Text="--%"/>
+                        </DockPanel>
+                        <Slider x:Name="VolumeSlider"
+                                Minimum="0"
+                                Maximum="100"
+                                Value="50"
+                                Margin="0,8,0,8"
+                                ValueChanged="VolumeSlider_Changed"/>
+                        <Button x:Name="MuteButton"
+                                Content="Toggle mute"
+                                Click="Mute_Click"
+                                HorizontalAlignment="Stretch"
+                                Padding="8"/>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Text="COMMAND"
+                           Foreground="#FF9CA6E8"
+                           FontWeight="Bold"
+                           Margin="0,16,0,8"/>
+
+                <Border Background="#FF202438"
+                        CornerRadius="10"
+                        Padding="12">
+                    <StackPanel>
+                        <TextBlock Text="Commands run in Windows cmd.exe. Only execute commands you trust."
+                                   Foreground="#FFFFC978"
+                                   FontSize="11"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,8"/>
+                        <TextBox x:Name="CommandInput"
+                                 Background="#FF141724"
+                                 Foreground="White"
+                                 CaretBrush="White"
+                                 BorderBrush="#FF484D70"
+                                 Padding="8"
+                                 Text="whoami"/>
+                        <Button Content="Execute"
+                                Margin="0,8,0,8"
+                                Padding="8"
+                                Click="Execute_Click"/>
+                        <TextBox x:Name="CommandOutput"
+                                 Height="100"
+                                 Background="#FF141724"
+                                 Foreground="#FFD4D9F5"
+                                 BorderBrush="#FF484D70"
+                                 FontFamily="Consolas"
+                                 FontSize="11"
+                                 Padding="8"
+                                 IsReadOnly="True"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Text="PANEL OPACITY"
+                           Foreground="#FF9CA6E8"
+                           FontWeight="Bold"
+                           Margin="0,16,0,4"/>
+                <Slider x:Name="OpacitySlider"
+                        Minimum="0.35"
+                        Maximum="1"
+                        Value="0.96"
+                        ValueChanged="OpacitySlider_Changed"/>
+                <TextBlock Text="OSC · WPF · Windows API"
+                           Foreground="#FF777F9E"
+                           FontSize="10"
+                           HorizontalAlignment="Center"
+                           Margin="0,16,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Border>
+</Window>
