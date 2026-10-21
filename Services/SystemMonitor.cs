@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace DesktopWidget.Services;
 
